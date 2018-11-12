@@ -1,0 +1,36 @@
+classdef arivaAPI
+    % arivaAPI provides an API to the ariva website
+    %   
+    
+        
+    properties
+        stockName;
+        startDate;
+        endDate;
+    end
+    
+    methods
+     function obj = set.stockName(obj,val)
+         if ~isa(val,'uint16')
+            error('only uint16 values allowed')
+         end
+         %# assign the value
+         obj.myProperty = val;
+      end 
+    end
+    
+    methods(Static)
+        histDate = getHistData(stockName,startDate,endDate);
+        constituents = getConstituents(stockName);
+    end
+    
+    methods(Access='private')
+        function stockName = validateInputsImpl(stockName)
+            if ~iscellstr(stockName)
+                stockName = cellstr(val);
+            end
+        end        
+    end
+    
+end
+
